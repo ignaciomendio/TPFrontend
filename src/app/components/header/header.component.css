@@ -15,6 +15,7 @@
 #header-aboutme{
     min-height: 100px;
     background-color: rgba(255, 255, 255,0.6);
+    text-align: left;
 }
 
 #header-foto-container{
@@ -28,4 +29,8 @@
     position: relative;
     top: -80px;
     margin-left: 20px;
+}
+
+.contact-text{
+    font-size:10px;
 }

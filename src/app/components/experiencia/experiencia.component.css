@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#experiencia-container{
+}
+
+#experiencia-title{
+    width: 100%;
+    background-color: rgba(255, 255, 255,0.6);
+}
+
+.experience-item{
+    background-color: rgba(255, 255, 255,0.8); 
+}
+
+.exp-logo{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.exp-figure{
+    margin: auto;
+    width: 100%;
+    max-width: 140px;
+    max-height: 140px;
+}
+
+.exp-desc div p{
+    margin-top: 3px;
+}
+
+    

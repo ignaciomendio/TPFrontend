@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PortfolioComponent,
-    HeaderComponent
+    HeaderComponent,
+    ExperienciaComponent
   ],
   imports: [
     BrowserModule,
