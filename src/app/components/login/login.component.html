@@ -9,7 +9,7 @@
         </div>
         <input type="email" formControlName="email" 
         [ngClass]="{'is-invalid' : email?.errors && email?.touched, 'is-valid' : !email?.errors && email?.touched }" 
-        class="form-control" id="exampleInputEmail1">
+        class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.email">
         <div *ngIf="email?.errors && email?.touched">
           <p *ngIf="email?.hasError('required')" class="text-danger">
             El campo E-Mail es Oblligatorio
@@ -26,7 +26,7 @@
         </div>
         <input type="password" formControlName="password" 
         [ngClass]="{'is-invalid' : password?.errors && password?.touched, 'is-valid' : !password?.errors && password?.touched }" 
-        class="form-control" id="exampleInputPassword1">
+        class="form-control" id="exampleInputPassword1" [(ngModel)]="usuario.password">
         <div *ngIf="password?.errors && password?.touched">
           <p *ngIf="password?.hasError('required')" class="text-danger">
             la contraseña es Obligatoria
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="p-2 text-center mt-2">
-        <button type="submit" style="width:100%" class="btn btn-primary">LOGIN</button>
+        <button type="submit" style="width:100%" class="btn btn-primary" [disabled]="!form.valid" (click)="ingresar()">LOGIN</button>
       </div>
     </form>
   </div>

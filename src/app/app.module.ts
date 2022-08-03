@@ -9,6 +9,10 @@ import { LoginComponent } from './components/login/login.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
+import { EducacionComponent } from './components/educacion/educacion.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment} from 'src/environments/environment'
+
 
 @NgModule({
   declarations: [
@@ -16,13 +20,15 @@ import { ExperienciaComponent } from './components/experiencia/experiencia.compo
     LoginComponent,
     PortfolioComponent,
     HeaderComponent,
-    ExperienciaComponent
+    ExperienciaComponent,
+    EducacionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
