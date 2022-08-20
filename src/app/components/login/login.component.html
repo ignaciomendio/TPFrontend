@@ -5,7 +5,7 @@
       <div class="mb-3">
         <div>
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <small  class="text-muted fw-lighter">&nbsp;(Shold be "test@testing.com" for succesful login)</small>
+          <small  class="text-muted fw-lighter">&nbsp;(Use "test@testing.com" para login)</small>
         </div>
         <input type="email" formControlName="email" 
         [ngClass]="{'is-invalid' : email?.errors && email?.touched, 'is-valid' : !email?.errors && email?.touched }" 
@@ -22,7 +22,7 @@
       <div class="mb-3">
         <div>
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <small  class="text-muted fw-lighter">&nbsp;(Shold be "pass1234" for succesful login)</small>
+          <small  class="text-muted fw-lighter">&nbsp;(Use "pass1234" para login)</small>
         </div>
         <input type="password" formControlName="password" 
         [ngClass]="{'is-invalid' : password?.errors && password?.touched, 'is-valid' : !password?.errors && password?.touched }" 

@@ -11,7 +11,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 import { EducacionComponent } from './components/educacion/educacion.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment} from 'src/environments/environment'
+import { environment} from 'src/environments/environment';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { SkillsComponent } from './components/skills/skills.component'
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { environment} from 'src/environments/environment'
     PortfolioComponent,
     HeaderComponent,
     ExperienciaComponent,
-    EducacionComponent
+    EducacionComponent,
+    ProyectosComponent,
+    SkillsComponent
   ],
   imports: [
     BrowserModule,

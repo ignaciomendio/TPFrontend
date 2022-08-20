@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#skills-container{
+}
+
+#skills-title{
+    width: 100%;
+    background-color: rgba(255, 255, 255,0.6);
+}
+
+.skills-items{
+    background-color: rgba(255, 255, 255,0.8); 
+}
+
+.skills-cartucho{
+    background-color: rgb(75, 98, 155); 
+    padding: 10px;
+    border-radius:10%;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.skills-cartucho .fa-trash-can {
+    color: whitesmoke;
+
+}   
+
+.skills-items li {
+    display: inline-block;
+    margin: 7px;
+    padding: 5px 10px;
+    color: #374054;
+    list-style: none;
+}

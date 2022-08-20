@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#proyectos-container{
+}
+
+#proyectos-title{
+    width: 100%;
+    background-color: rgba(255, 255, 255,0.6);
+}
+
+.proyecto-item{
+    background-color: rgba(255, 255, 255,0.8); 
+}
+
+.proyecto-logo{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.proyecto-figure{
+    margin: auto;
+    width: 100%;
+    max-width: 140px;
+    max-height: 140px;
+}
+
+.proyecto-desc div p{
+    margin-top: 3px;
+}
+
+
