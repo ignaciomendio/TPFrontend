@@ -1,28 +1,98 @@
 <div class="row text-end justify-content p-2" id="header-banner">
     <div id="edit-but-container">
-        <a class="m-auto d-inline" href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+        <a class="m-auto" (click)="openEditPopup()"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
     </div>
 </div>
 <div class="row text-center p-2" id="header-data">
     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 align-justify-content" id="header-foto-container" >
-        <img id="fotoPerfil" src="https://thumbs2.imgbox.com/6e/63/uSJ4NdOE_t.png" alt="FOTO">
+        <img id="fotoPerfil" src={{persona.image_perfil}} alt="FOTO">
     </div>
     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" id="header-name-container">
         <div class="mt-2">
-            <h1>Ignacio Mendiola</h1>
-            <h2>Ingeniero Industrial & Full Stack Developer</h2>    
+            <h1>{{persona.nombres}} {{persona.apellido}}</h1>
+            <h2>{{persona.titulo}}</h2>    
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" id="header-contact-container">
-        <p><i class="fa-solid fa-envelope contact-text"></i>&nbsp;ignaciomendio@gmail.com</p>
-        <p><i class="fa-brands fa-whatsapp contact-text"></i>&nbsp;+54 9 11 5768 0192</p>
-        <p><i class="fa-solid fa-location-pin contact-text"></i>&nbsp;Donizetti 141, Buenos Aires</p>
-        <p><i class="fa-solid fa-earth-americas contact-text"></i>&nbsp;Argentina</p>
+        <p><i class="fa-solid fa-envelope contact-text"></i>&nbsp;{{persona.mail}}</p>
+        <p><i class="fa-brands fa-whatsapp contact-text"></i>&nbsp;{{persona.telefono}}</p>
+        <p><i class="fa-solid fa-location-pin contact-text"></i>&nbsp;{{persona.domicilio}}</p>
+        <p><i class="fa-solid fa-earth-americas contact-text"></i>&nbsp;{{persona.pais}}</p>
     </div>
 </div>
 <div class="row text-center p-2" id="header-aboutme">
     <h3 class="mt-3">Sobre mi</h3>
-    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur cumque voluptatibus accusamus aspernatur odit exercitationem, vitae vel, rerum eligendi temporibus unde officia repellendus. Mollitia rerum maxime totam enim voluptas! Suscipit!</p>
+    <p class="mt-2">{{persona.sobre_mi}}</p>
 </div>
 
+<!-- Formulario Modal para editar -->
+<div class="modal edit-window p-2" id="persona-edit-dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog-centered edit-dialog p-5" >
+        <div class="modal-content edit-content p-2">
+            <div class="modal-header edit-header mb-3">
+                <h3 class="modal-title">Edición de datos personales</h3>
+                <a class="text-end" (click)="closeEditPopup()" ><i class="fa-solid fa-rectangle-xmark fa-xl"></i></a>
+            </div>
+            <div class="modal-body edit-body">
+                <form [formGroup]="formPersona">
+                    <div class="form-group mt-2 p-1">
+                      <label for="nombrein">Nombres</label>
+                      <input type="text" class="form-control" id="nombrein" formControlName="nombres" 
+                      placeholder="Ingrese nombres" [(ngModel)]="persona.nombres">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="apellidoin">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidoin" formControlName="apellido"
+                        placeholder="Ingrese apellidos" [(ngModel)]="persona.apellido">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="tituloin">Títulos</label>
+                        <input type="text" class="form-control" id="tituloin" formControlName="titulo"
+                        placeholder="Ingrese títulos" [(ngModel)]="persona.titulo">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="mailin">E-mail</label>
+                        <input type="text" class="form-control" id="mailin" formControlName="email"
+                        placeholder="Ingrese correo electrónico" [(ngModel)]="persona.mail">
+                    </div>                 
+                    <div class="form-group p-1">
+                        <label for="telin">Teléfono</label>
+                        <input type="text" class="form-control" id="telin" formControlName="telfono"
+                        placeholder="Ingrese Nro de teléfono" [(ngModel)]="persona.telefono">
+                    </div>                 
+                    <div class="form-group p-1">
+                        <label for="domin">Domicilio</label>
+                        <input type="text" class="form-control" id="domin" formControlName="domicilio"
+                        placeholder="Ingrese Domicilio" [(ngModel)]="persona.domicilio">
+                    </div>                 
+                    <div class="form-group p-1">
+                        <label for="paisin">País de Residencia</label>
+                        <input type="text" class="form-control" id="paisin" formControlName="pais"
+                        placeholder="Ingrese País de Residencia" [(ngModel)]="persona.pais">
+                    </div>                 
+                    <div class="form-group p-1">
+                        <label for="sobremiin">Sobre mi</label>
+                        <textarea class="form-control" id="sobremiin" formControlName="sobremi"
+                        rows="3" [(ngModel)]="persona.sobre_mi"></textarea>
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="imagenin">Link a foto personal</label>
+                        <input type="text" class="form-control" id="imagenin" formControlName="linkfoto"
+                        placeholder="Ingresar link a la imagen de la foto personal" [(ngModel)]="persona.image_perfil">
+                    </div>                
+                </form>
+            </div>
+            <div class="modal-footer edit-footer">
+                <div class="d-flex w-100 justify-content-around mt-3 mb-3">
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="Actualizar()">
+                        Aceptar
+                    </button>
+                    <button type="button" class="btn btn-danger p-2" style="width: 100px" (click)="closeEditPopup()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
