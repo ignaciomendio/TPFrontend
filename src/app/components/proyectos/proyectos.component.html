@@ -4,46 +4,78 @@
             <h2 class="text-start pl-3">Proyectos</h2>
         </div>
         <div class="col-1 d-flex align-content-center">
-            <a class="m-auto" href=""><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+            <a class="m-auto" (click)="addProyecto()"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
         </div>
     </div>    
-    <div class="proyecto-item row pb-3">
+    <div *ngFor="let pr of proyectos" class="proyecto-item row pb-3">
         <div class="proyecto-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-            <img class="proyecto-figure" src="../../../assets/images/img-proy-generica.jpg" alt="Unavailable">
+            <img class="proyecto-figure" src={{pr.imagen}} alt="Unavailable">
         </div>
         <div class="proyecto-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
             <div>
-                <h3 class="proyecto-titulo mt-2 mb-2 text-center">Nombre de Proyecto 1</h3>
-                <p class="proyecto-descripcion">Descripción del proyectos, Lorem, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, numquam. Facilis eius nulla ducimus vero ratione et obcaecati mollitia atque possimus dignissimos velit alias at quae, repellat eum! Laudantium, dolorum?</p>
-                <p class="proyecto-link mt-2 mb-2 text-center"><a href="#">Link a Proyecto</a></p>
+                <h3 class="proyecto-titulo mt-2 mb-2 text-center">{{pr.nombre}}</h3>
+                <p class="proyecto-descripcion">{{pr.descripcion}}</p>
+                <p class="proyecto-link mt-2 mb-2 text-center"><a href={{pr.projectLink}}>Link a Proyecto</a></p>
             </div>
         </div>
         <div class="proyectos-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
             <div>
-                    <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                    <a class="m-auto" (click)="edit(pr)"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
                     &nbsp;
-                    <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
+                    <a class="m-auto" (click)="eliminar(pr)"><i class="fa-solid fa-trash-can fa-xl"></i></a>
             </div>
         </div>
     </div>
-    <div class="proyecto-item row pb-3">
-        <div class="proyecto-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-            <img class="proyecto-figure" src="../../../assets/images/img-proy-generica.jpg" alt="Unavailable">
-        </div>
-        <div class="proyecto-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
-            <div>
-                <h3 class="proyecto-titulo mt-2 mb-2 text-center">Nombre de Proyecto 2</h3>
-                <p class="proyecto-descripcion">Descripción del proyectos, Lorem, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, numquam. Facilis eius nulla ducimus vero ratione et obcaecati mollitia atque possimus dignissimos velit alias at quae, repellat eum! Laudantium, dolorum?</p>
-                <p class="proyecto-link mt-2 mb-2 text-center"><a href="#">Link a Proyecto</a></p>
-            </div>
-        </div>
-        <div class="proyectos-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
-            <div>
-                    <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-                    &nbsp;
-                    <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
-            </div>
-        </div>
-    </div> 
-
 </div>
+
+<!-- Formulario Modal para editar -->
+<div class="modal edit-window p-2" id="proyectos-edit-dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog-centered edit-dialog p-5" >
+        <div class="modal-content edit-content p-2">
+            <div class="modal-header edit-header mb-3">
+                <h3 class="modal-title" *ngIf="nuevo">Agregar Datos de proyectos</h3>
+                <h3 class="modal-title" *ngIf="!nuevo">Editar Datos de proyectos</h3>
+                <a class="text-end" (click)="closeEditPopup()" ><i class="fa-solid fa-rectangle-xmark fa-xl"></i></a>
+            </div>
+            <div class="modal-body edit-body">
+                <form [formGroup]="formProyecto">
+                    <div class="form-group mt-2 p-1">
+                      <label for="nombrein">Título del Proyecto</label>
+                      <input type="text" class="form-control" id="nombrein" formControlName="nombre" 
+                      placeholder="Ingrese título de Proyecto" [(ngModel)]="proyecto.nombre">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="descrpcionin">Descripción del proyecto</label>
+                        <textarea class="form-control" id="descrpcionin" formControlName="descripcion"
+                        rows="3" placeholder="Detalles y descripción del Proyecto" [(ngModel)]="proyecto.descripcion"></textarea>
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="projectLinkin">Link a proyecto</label>
+                        <input type="text" class="form-control" id="projectLinkin" formControlName="projectLink"
+                        placeholder="Ingresar link al proyecto" [(ngModel)]="proyecto.projectLink">
+                    </div>                
+                    <div class="form-group p-1">
+                        <label for="imagenin">Link a imagen del proyecto</label>
+                        <input type="text" class="form-control" id="imagenin" formControlName="imagen"
+                        placeholder="Ingresar link a la imagen del proyecto" [(ngModel)]="proyecto.imagen">
+                    </div>                
+                </form>
+            </div>
+            <div class="modal-footer edit-footer">
+                <div class="d-flex w-100 justify-content-around mt-3 mb-3">
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="actualizar()" *ngIf="!nuevo">
+                        Modificar
+                    </button>
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="agregar()" *ngIf="nuevo">
+                        Agregar
+                    </button>
+                    <button type="button" class="btn btn-danger p-2" style="width: 100px" (click)="closeEditPopup()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

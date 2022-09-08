@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class HeaderComponent implements OnInit {
 
-    persona!: Persona;
+    persona: Persona;
+    per: Persona = new Persona;
 
     formPersona: FormGroup;
 
@@ -44,9 +45,24 @@ export class HeaderComponent implements OnInit {
     this.displayStyle = "none";
   }
 
+  editarPerfil(){
+    this.per = {...this.persona};
+    this.openEditPopup();
+
+  }
+
   Actualizar(){
     console.log("actualizando....");
-    this.portServ.editPersonaData(this.persona.id, this.persona).subscribe((response)=>this.displayStyle = "none");
+    this.portServ.editPersonaData(this.persona.id, this.per).subscribe({
+      next: (response)=> {
+        this.persona = {...this.per};
+        this.closeEditPopup();
+       },
+      error: (err)=> {
+        console.log("Error: " + err);
+        this.closeEditPopup();
+      }
+    });
   }
 
 }

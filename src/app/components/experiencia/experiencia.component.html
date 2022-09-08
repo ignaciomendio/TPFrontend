@@ -4,52 +4,90 @@
             <h2 class="text-start pl-3">Experiencia Laboral</h2>
         </div>
         <div class="col-1 d-flex align-content-center">
-            <a class="m-auto" href=""><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+            <a class="m-auto" (click)="addExperiencia()"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
         </div>
     </div>    
-    <div class="experience-item row pb-3">
+    <div *ngFor="let exp of experiencias" class="experience-item row pb-3">
         <div class="exp-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-                <img class="exp-figure" src="https://upload.wikimedia.org/wikipedia/commons/3/34/The_Clorox_Company_logo.svg" alt="">
+                <img class="exp-figure" src={{exp.imagen}} alt="">
         </div>
         <div class="exp-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
             <div>
-                <p><strong>Empleador:</strong> CLOROX Argentina SA.</p> 
-                <p><strong>Función:</strong> Supply Planner</p>
-                <p><strong>Desde:</strong>Desde: 10/2011 <strong>hasta:</strong> Actualidad</p>
-                <p><strong>Descripción:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, rem? Eum delectus itaque dolores quidem cumque porro. Voluptates commodi numquam veniam placeat laborum pariatur sint, modi perspiciatis non eum nam</p>
+                <p><strong>Empleador:</strong> {{exp.empleador}}</p> 
+                <p><strong>Función:</strong> {{exp.funcion}}</p>
+                <p><strong>Desde:</strong>Desde: {{exp.inicio}} <strong>hasta:</strong> {{exp.fin}}</p>
+                <p><strong>Descripción:</strong> {{exp.descrpcion}}</p>
             </div>
         </div>
         <div class="exp-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
             <div>
-                <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                <a class="m-auto" (click)="edit(exp)"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
                 &nbsp;
-                <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
+                <a class="m-auto" (click)="eliminar(exp)"><i class="fa-solid fa-trash-can fa-xl"></i></a>
             </div>
         </div>
-        
-
     </div>
-    <div class="experience-item row pb-3">
-        <div class="exp-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-                <img class="exp-figure" src="http://www.envasesfadeh.com.ar/wp-content/uploads/2022/03/Fadeh-logo-head.svg" alt="">
-        </div>
-        <div class="exp-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
-            <div>
-                <p><strong>Empleador:</strong> Envases FADEH SA.</p> 
-                <p><strong>Función:</strong> jefe de Planificación y Logística</p>
-                <p><strong>Desde:</strong>Desde: 06/2010 <strong>hasta:</strong> 2011</p>
-                <p><strong>Descripción:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, rem? Eum delectus itaque dolores quidem cumque porro. Voluptates commodi numquam veniam placeat laborum pariatur sint, modi perspiciatis non eum nam</p>
-            </div>
-        </div>
-        <div class="exp-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
-            <div>
-                <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-                &nbsp;
-                <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
-            </div>
-        </div>
-        
+</div>
 
-    </div> 
+<!-- Formulario Modal para editar -->
+<div class="modal edit-window p-2" id="experiencia-edit-dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog-centered edit-dialog p-5" >
+        <div class="modal-content edit-content p-2">
+            <div class="modal-header edit-header mb-3">
+                <h3 class="modal-title" *ngIf="nuevo">Agregar Datos de experiencia</h3>
+                <h3 class="modal-title" *ngIf="!nuevo">Editar Datos de experiencia</h3>
+                <a class="text-end" (click)="closeEditPopup()" ><i class="fa-solid fa-rectangle-xmark fa-xl"></i></a>
+            </div>
+            <div class="modal-body edit-body">
+                <form [formGroup]="formExperiencia">
+                    <div class="form-group mt-2 p-1">
+                      <label for="empleadorin">Empleador</label>
+                      <input type="text" class="form-control" id="empleadorin" formControlName="empleador" 
+                      placeholder="Ingrese empleador" [(ngModel)]="experiencia.empleador">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="funcionin">Función</label>
+                        <input type="text" class="form-control" id="funcionin" formControlName="funcion"
+                        placeholder="Ingrese función" [(ngModel)]="experiencia.funcion">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="descrpcionin">Descripción de la función</label>
+                        <textarea class="form-control" id="descrpcionin" formControlName="descrpcion"
+                        rows="3" placeholder="Detalles de las posición o descripción de la función" [(ngModel)]="experiencia.descrpcion"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="form-group p-1 col-6">
+                            <label for="inicioin">Desde</label>
+                            <input type="text" class="form-control" id="inicioin" formControlName="inicio"
+                            [(ngModel)]="experiencia.inicio">
+                        </div>
+                        <div class="form-group p-1 col-6">
+                            <label for="finin">Hasta</label>
+                            <input type="text" class="form-control" id="finin" formControlName="fin"
+                            [(ngModel)]="experiencia.fin">
+                        </div>                    
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="imagenin">Link a Logo del empleador</label>
+                        <input type="text" class="form-control" id="imagenin" formControlName="imagen"
+                        placeholder="Ingresar link a la imagen del logo del empleador" [(ngModel)]="experiencia.imagen">
+                    </div>                
+                </form>
+            </div>
+            <div class="modal-footer edit-footer">
+                <div class="d-flex w-100 justify-content-around mt-3 mb-3">
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="actualizar()" *ngIf="!nuevo">
+                        Modificar
+                    </button>
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="agregar()" *ngIf="nuevo">
+                        Agregar
+                    </button>
+                    <button type="button" class="btn btn-danger p-2" style="width: 100px" (click)="closeEditPopup()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

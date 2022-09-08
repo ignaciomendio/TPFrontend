@@ -4,48 +4,93 @@
             <h2 class="text-start pl-3">Educacion</h2>
         </div>
         <div class="col-1 d-flex align-content-center">
-            <a class="m-auto" href=""><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+            <a class="m-auto" (click)="addEducacion()"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
         </div>
     </div>    
-    <div class="educacion-item row pb-3">
+    <div *ngFor="let ed of educaciones" class="educacion-item row pb-3">
         <div class="educacion-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-                <img class="educacion-figure" src="https://upload.wikimedia.org/wikipedia/commons/1/14/Logo_de_la_Universidad_de_Buenos_Aires.jpg" alt="">
+                <img class="educacion-figure" src={{ed.imagen}} alt="">
         </div>
         <div class="educacion-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
             <div>
-                <p><strong>Institución:</strong> Universidad de Buenos Aires</p> 
-                <p><strong>Título:</strong> Ingeniero Industrial</p>
-                <p><strong>Desde:</strong>Desde: 10/2011 <strong>hasta:</strong> Actualidad</p>
-                <p><strong>Status:</strong> Completada</p>
+                <p><strong>Institución:</strong> {{ed.institucion}}</p> 
+                <p><strong>Título:</strong> {{ed.titulo}}</p>
+                <p><strong>Desde:</strong>{{ed.inicio}} <strong>hasta:</strong> {{ed.fin}}</p>
+                <p><strong>Status:</strong> 
+                    <i *ngIf="ed.completada" style="color:green">Completada</i>
+                    <i *ngIf="!ed.completada" style="color:red">Incompleta ({{ed.porcentaje}}%)</i>
+                </p>
             </div>
         </div>
         <div class="educacion-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
             <div>
-                <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                <a class="m-auto" (click)="edit(ed)"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
                 &nbsp;
-                <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
+                <a class="m-auto" (click)="eliminar(ed)"><i class="fa-solid fa-trash-can fa-xl"></i></a>
             </div>
         </div>
     </div> 
-    <div class="educacion-item row pb-3">
-        <div class="educacion-logo col-xs-12 col-sm-12 col-md-3 col-lg-2 p-2">
-                <img class="educacion-figure" src="https://upload.wikimedia.org/wikipedia/commons/0/05/INTI.svg" alt="">
-        </div>
-        <div class="educacion-desc col-xs-12 col-sm-12 col-md-8 col-lg-9 p-2">
-            <div>
-                <p><strong>Institución:</strong> Programa: Yo Programo</p> 
-                <p><strong>Título:</strong> Full Stack Developer</p>
-                <p><strong>Desde:</strong>Desde: 02/2022 <strong>hasta:</strong> Actualidad</p>
-                <p><strong>Status:</strong> 85%</p>
-            </div>
-        </div>
-        <div class="educacion-crud col-xs-12 col-sm-12 col-md-1 col-lg-1 pt-2 d-flex justify-content-around">
-            <div>
-                <a href=""><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-                &nbsp;
-                <a href=""><i class="fa-solid fa-trash-can fa-xl"></i></a>
-            </div>
-        </div>
-    </div> 
-
 </div>
+
+<!-- Formulario Modal para editar -->
+<div class="modal edit-window p-2" id="experiencia-edit-dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog-centered edit-dialog p-5" >
+        <div class="modal-content edit-content p-2">
+            <div class="modal-header edit-header mb-3">
+                <h3 class="modal-title" *ngIf="nuevo">Agregar Datos de Educación</h3>
+                <h3 class="modal-title" *ngIf="!nuevo">Editar Datos de Educación</h3>
+                <a class="text-end" (click)="closeEditPopup()" ><i class="fa-solid fa-rectangle-xmark fa-xl"></i></a>
+            </div>
+            <div class="modal-body edit-body">
+                <form [formGroup]="formEducacion">
+                    <div class="form-group mt-2 p-1">
+                      <label for="institucionin">institucion</label>
+                      <input type="text" class="form-control" id="institucionin" formControlName="institucion" 
+                      placeholder="Ingrese institución" [(ngModel)]="educacion.institucion">
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="tituloin">Título</label>
+                        <input type="text" class="form-control" id="tituloin" formControlName="titulo"
+                        placeholder="Ingrese el título obtenido o a obtener" [(ngModel)]="educacion.titulo">
+                    </div>
+                    <div class="row">
+                        <div class="form-group p-1 col-5">
+                            <label for="inicioin">Desde</label>
+                            <input type="text" class="form-control" id="inicioin" formControlName="inicio"
+                            [(ngModel)]="educacion.inicio">
+                        </div>
+                        <div class="form-group p-1 col-5">
+                            <label for="finin">Hasta</label>
+                            <input type="text" class="form-control" id="finin" formControlName="fin"
+                            [(ngModel)]="educacion.fin">
+                        </div>      
+                        <div class="form-group p-1 col-2">
+                            <label for="porcentajein">Grado de avance (%)</label>
+                            <input type="number" class="form-control" id="porcentajein" formControlName="porcentaje"
+                            [(ngModel)]="educacion.porcentaje">
+                        </div>                
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="imagenin">Link a Logo de la institución</label>
+                        <input type="text" class="form-control" id="imagenin" formControlName="imagen"
+                        placeholder="Ingresar link a la imagen del logo de la institucion" [(ngModel)]="educacion.imagen">
+                    </div>                
+                </form>
+            </div>
+            <div class="modal-footer edit-footer">
+                <div class="d-flex w-100 justify-content-around mt-3 mb-3">
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="actualizar()" *ngIf="!nuevo">
+                        Modificar
+                    </button>
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="agregar()" *ngIf="nuevo">
+                        Agregar
+                    </button>
+                    <button type="button" class="btn btn-danger p-2" style="width: 100px" (click)="closeEditPopup()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

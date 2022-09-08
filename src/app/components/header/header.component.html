@@ -1,6 +1,6 @@
 <div class="row text-end justify-content p-2" id="header-banner">
     <div id="edit-but-container">
-        <a class="m-auto" (click)="openEditPopup()"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+        <a class="m-auto" (click)="editarPerfil()"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
     </div>
 </div>
 <div class="row text-center p-2" id="header-data">
@@ -38,47 +38,47 @@
                     <div class="form-group mt-2 p-1">
                       <label for="nombrein">Nombres</label>
                       <input type="text" class="form-control" id="nombrein" formControlName="nombres" 
-                      placeholder="Ingrese nombres" [(ngModel)]="persona.nombres">
+                      placeholder="Ingrese nombres" [(ngModel)]="per.nombres">
                     </div>
                     <div class="form-group p-1">
                         <label for="apellidoin">Apellidos</label>
                         <input type="text" class="form-control" id="apellidoin" formControlName="apellido"
-                        placeholder="Ingrese apellidos" [(ngModel)]="persona.apellido">
+                        placeholder="Ingrese apellidos" [(ngModel)]="per.apellido">
                     </div>
                     <div class="form-group p-1">
                         <label for="tituloin">Títulos</label>
                         <input type="text" class="form-control" id="tituloin" formControlName="titulo"
-                        placeholder="Ingrese títulos" [(ngModel)]="persona.titulo">
+                        placeholder="Ingrese títulos" [(ngModel)]="per.titulo">
                     </div>
                     <div class="form-group p-1">
                         <label for="mailin">E-mail</label>
                         <input type="text" class="form-control" id="mailin" formControlName="email"
-                        placeholder="Ingrese correo electrónico" [(ngModel)]="persona.mail">
+                        placeholder="Ingrese correo electrónico" [(ngModel)]="per.mail">
                     </div>                 
                     <div class="form-group p-1">
                         <label for="telin">Teléfono</label>
                         <input type="text" class="form-control" id="telin" formControlName="telfono"
-                        placeholder="Ingrese Nro de teléfono" [(ngModel)]="persona.telefono">
+                        placeholder="Ingrese Nro de teléfono" [(ngModel)]="per.telefono">
                     </div>                 
                     <div class="form-group p-1">
                         <label for="domin">Domicilio</label>
                         <input type="text" class="form-control" id="domin" formControlName="domicilio"
-                        placeholder="Ingrese Domicilio" [(ngModel)]="persona.domicilio">
+                        placeholder="Ingrese Domicilio" [(ngModel)]="per.domicilio">
                     </div>                 
                     <div class="form-group p-1">
                         <label for="paisin">País de Residencia</label>
                         <input type="text" class="form-control" id="paisin" formControlName="pais"
-                        placeholder="Ingrese País de Residencia" [(ngModel)]="persona.pais">
+                        placeholder="Ingrese País de Residencia" [(ngModel)]="per.pais">
                     </div>                 
                     <div class="form-group p-1">
                         <label for="sobremiin">Sobre mi</label>
                         <textarea class="form-control" id="sobremiin" formControlName="sobremi"
-                        rows="3" [(ngModel)]="persona.sobre_mi"></textarea>
+                        rows="3" [(ngModel)]="per.sobre_mi"></textarea>
                     </div>
                     <div class="form-group p-1">
                         <label for="imagenin">Link a foto personal</label>
                         <input type="text" class="form-control" id="imagenin" formControlName="linkfoto"
-                        placeholder="Ingresar link a la imagen de la foto personal" [(ngModel)]="persona.image_perfil">
+                        placeholder="Ingresar link a la imagen de la foto personal" [(ngModel)]="per.image_perfil">
                     </div>                
                 </form>
             </div>
