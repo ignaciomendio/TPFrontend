@@ -13,7 +13,7 @@ import { Skill } from '../Models/Skill';
 
 export class PortafolioservicesService {
 
-  private URLBkEnd: string = 'http://localhost:8080/';
+  private URLBkEnd: string = 'https://tranquil-escarpment-47572.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
