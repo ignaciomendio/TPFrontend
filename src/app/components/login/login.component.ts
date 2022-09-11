@@ -21,8 +21,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.usuario.email, this.usuario.password).then((res) => {
             console.log("Se Logeo: ",res);
             if (res) {
+              sessionStorage.setItem("Auth", "OK");
               this.router.navigate(["portfolio"]);
             } else {
+              sessionStorage.setItem("Auth", "NOOK");
               window.alert("Usuario no valido");
             }
     });

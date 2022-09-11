@@ -4,32 +4,50 @@
             <h2 class="text-start pl-3">Skills</h2>
         </div>
         <div class="col-1 d-flex align-content-center">
-            <a class="m-auto" href=""><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+            <a class="m-auto" (click)="addSkill()"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
         </div>
     </div>    
     <div class="skills-items row">
         <ul>
-            <li>
+            <li *ngFor="let sk of skills">
                 <div class="skills-cartucho">
-                    JavaScript
+                    {{sk.tecnologia}}
                     &nbsp;
-                    <a href=""><i class="fa-solid fa-trash-can"></i></a>
-                </div>
-            </li>
-            <li>
-                <div class="skills-cartucho">
-                    PHP
-                    &nbsp;
-                    <a href=""><i class="fa-solid fa-trash-can"></i></a>
-                </div>
-            </li>
-            <li>
-                <div class="skills-cartucho">
-                    Java
-                    &nbsp;
-                    <a href=""><i class="fa-solid fa-trash-can"></i></a>
+                    <a (click)="eliminar(sk)"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
             </li>
         </ul>
     </div> 
 </div>
+
+<!-- Formulario Modal para agregar skills -->
+<div class="modal edit-window p-2" id="skill-edit-dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog-centered edit-dialog p-5" >
+        <div class="modal-content edit-content p-2">
+            <div class="modal-header edit-header mb-3">
+                <h3 class="modal-title">Agregar Skill / Tecnología</h3>
+                <a class="text-end" (click)="closeEditPopup()" ><i class="fa-solid fa-rectangle-xmark fa-xl"></i></a>
+            </div>
+            <div class="modal-body edit-body">
+                <form [formGroup]="formSkills">
+                    <div class="form-group mt-2 p-1">
+                      <label for="skillin">Tecnología o habilidad a incorporar</label>
+                      <input type="text" class="form-control" id="skillin" formControlName="tecnologia" 
+                      placeholder="Tecnología o habilidad" [(ngModel)]="skill.tecnologia">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer edit-footer">
+                <div class="d-flex w-100 justify-content-around mt-3 mb-3">
+                    <button type="button" class="btn btn-success p-2" style="width: 100px" (click)="agregar()">
+                        Agregar
+                    </button>
+                    <button type="button" class="btn btn-danger p-2" style="width: 100px" (click)="closeEditPopup()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

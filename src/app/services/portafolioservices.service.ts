@@ -5,6 +5,7 @@ import { Experiencia } from '../Models/Experiencia';
 import { Educacion } from '../Models/Educacion';
 import { Proyecto } from '../Models/Proyecto';
 import { Observable } from 'rxjs';
+import { Skill } from '../Models/Skill';
 
 @Injectable({
   providedIn: 'root'
@@ -72,4 +73,17 @@ export class PortafolioservicesService {
   addProyectoData(ed: Proyecto): Observable<any>{
     return this.http.post(this.URLBkEnd + 'api/proyectos/agregar', ed);
   }
+
+  getSkillData(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(this.URLBkEnd + 'api/tecnologia/listar');
+  }
+
+  deleteSkillData(id: number): Observable<any>{
+    return this.http.delete(this.URLBkEnd + 'api/tecnologia/eliminar/' + id);
+  }
+
+  addSkillData(sk: Skill): Observable<any>{
+    return this.http.post(this.URLBkEnd + 'api/tecnologia/agregar', sk);
+  }
+
 }
